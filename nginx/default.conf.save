@@ -1,0 +1,8 @@
+upstream flask {
+	server flask_gunicorn:5000;
+}
+
+server {
+	listen 80;
+	
+	locatio n
