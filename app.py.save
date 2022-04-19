@@ -1,8 +1,7 @@
-
 import datetime
 import os
 from flask import Flask,request
-import json
+
 from predict import download_model_weights, get_predictions
 
 app = Flask(__name__)
@@ -34,8 +33,7 @@ def tryme():
     #print(result)
     #stringresult =  ''.join(str(e) for e in result)
     #return '[{}]'.format(stringresult)
-    return json.dumps(result)
-
+    return app.py
 @app.route('/predict', methods = ['POST'])
 def hello_world():
     uploaded_file = request.files['bottleimage']
@@ -44,9 +42,10 @@ def hello_world():
         newfilename = os.path.join(UPLOAD_FOLDER,'{}-{}'.format(int(datetime.datetime.now().timestamp()),uploaded_file.filename))
         uploaded_file.save(newfilename)
         result  = get_predictions(newfilename)
-        #print(result)
-        #stringresult =  ''.join(str(e) for e in result)
-        return json.dumps(result)
+        print(result)
+        stringresult =  ''.join(str(e) for e in result)
+        return '[{}]'.format(stringresult)
+    return 'Hello, World!'
 
 
 if __name__ == '__main__':
